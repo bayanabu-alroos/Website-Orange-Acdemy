@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="Orangestyle.css">
+</head>
+<body>
+    <div class="d-md-flex flex-md-equal h-100">
+        <div class="col-lg-4  my-div">
+          <div id="carouselExampleSlidesOnly " class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="photo/1.jpg" class="d-block w-75" alt="First slide"style="height:700px ;">
+              </div>
+              <div class="carousel-item">
+                <img src="photo/2.jpg" class="d-block w-75" alt="Second slide" style="height:700px ;">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <nav class="navbar navbar-expand-lg border-bottom  border-dark border-3">
+            <div class="container-fluid">
+              <a class="navbar-brand " href="#" id="myDIV"><img src="photo/logo.png" alt=""
+                  style="width: 250px; padding-top: 10px;"></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                <ul class="navbar-nav pt-5 fw-bold">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#" style="color: black; ">
+                      <h6  style="font-size:16px;">Help</h6>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" style="color:black ;">
+                      <h6 style="font-size:16px;">Terms & Conditions</h6>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <div class="m-5 forms" >
+            <form action="#" class="form" id="form" onsubmit="return isValid()">
+              <h2 class="fw-bold">Create an account</h2>
+              <div>
+                <label for="exampleFormControlInput1" class="form-label fw-bold">Email address <span style="color:red ;">*</span></label>
+                <input type="email" name="email"  class="form-control" id="email" >
+                <div id="emailtext"style="margin: 0 0 16px 150px; font-size:12px;color:red"></div>
+                <p style="font-size:12px; ">eg: username@domin.com</p>
+              </div>
+              <div>
+                <label for="exampleFormControlInput1" class="form-label fw-bold">Create Password <span style="color:red ;">*</span></label>
+                <input type="password" name="password" class="form-control" id="password">
+                <div id="pass" style="margin: 0 0 16px 150px; font-size:12px;color:red"></div>
+                <p style="font-size:12px; ">The Password should be between 6-18 characters.</p>
+              </div>
+
+              <br>
+              <div class="btnss">
+    
+                <button type="submit"  style="background-color:#ff7900;margin-left: 150px;padding:10px 325px ;"class="btn  btn-block">  Sigin      </button>
+            </div>
+          </form>        
+        </div>
+      </div>
+      <script>
+function isValid() {
+    
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    if (!isFormValid(email , password)){
+      return
+    }
+    if (validate_user(email, password)) {
+      window.open("https://www.google.com/")
+      // location.replace("./index.html")
+      }
+    else {
+      alert("user name or password is invalid")
+    }
+
+  }// end valid method
+
+
+
+  function validate_user(email, password) {
+      if (localStorage.getItem("users") == undefined) {
+        return false
+      }
+
+
+      const users = JSON.parse(localStorage.getItem("users"))
+
+      for (let i = 0; i < users.length; i++) {
+
+        const user = users[i]
+        
+        if (user["email"] == email && user["password"] == password) {
+          return true
+          // user found
+        }
+      }
+
+      return false // user not found
+
+    }
+
+    function isFormValid(email, password) {
+
+
+    var message1 = document.getElementById("emailtext");
+    var message3 = document.getElementById("pass");
+
+
+      let isvalid = true
+
+      if (email == "") {
+        message1.innerHTML = "The email must be a valid email address.";
+          isvalid = false
+      }
+
+      if (password.length < 6) {
+        message3.innerHTML = "The password field is required.";
+        isvalid = false
+      }
+
+      if (password.length > 6 && password.length < 15) {
+        message3.innerHTML = "good";
+        
+      }
+      return isvalid
+    }
+
+        
+      </script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"crossorigin="anonymous"></script>
+</body>
+</html>
